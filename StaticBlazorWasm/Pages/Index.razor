@@ -1,0 +1,24 @@
+﻿@page "/"
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, GitHub Pages!</h1>
+
+<div class="mt-4">
+    <b>.NET SDK:</b> version 8 preview 5
+</div>
+
+<div class="mt-4">
+    `Deployment` from: <code><pre><b>wwwroot/appsettings.*.json</b></pre></code>
+    <b>Deployment:</b> <code><pre><b>@appSettingsDeploymentValue</b></pre></code>
+</div>
+
+@code {
+    string appSettingsDeploymentValue = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        appSettingsDeploymentValue = Configuration.GetValue<string>("Settings:Deployment") ?? "Can't retrieve the value from `wwwroot/appsettings.*.json`";
+    }
+}
